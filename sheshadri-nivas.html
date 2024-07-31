@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <meta http-equiv="refresh" content="300">
+    <title>Sheshadri Nivas - Shubhada Developers</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            max-width: 1700px;
+            height: auto;
+            max-height: 1163px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .background-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .buttons-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .buttons-container a {
+            display: inline-block;
+            text-align: center;
+            color: #fff;
+            border: 1px solid #fff;
+            width: 50px;
+            height: 30px;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+        }
+
+        .buttons-container a:hover {
+            background-color: #333;
+        }
+
+        .header, .footer {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .nav-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .nav-container ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-container ul li {
+            position: relative;
+        }
+
+        .nav-container ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .nav-container ul li .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .nav-container ul li .dropdown-content a {
+            padding: 10px 20px;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .nav-container ul li .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .nav-container ul li:hover .dropdown-content {
+            display: block;
+        }
+
+        .text-box {
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .logo-container img {
+            width: 100px;
+        }
+
+        .brochure-link {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            background: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+        }
+
+        .brochure-link:hover {
+            background-color: #e0e0e0;
+        }
+
+        .title {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .new-section {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .new-section .section-title {
+            color: red;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .points-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .point {
+            flex: 1 1 calc(25% - 20px);
+            max-width: calc(25% - 20px);
+            background-color: #e0e0e0;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .point {
+                flex: 1 1 calc(50% - 20px);
+                max-width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .point {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            background: #333;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 20px;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+
+        .enquiry-form {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .enquiry-form input[type="text"],
+        .enquiry-form input[type="email"],
+        .enquiry-form input[type="tel"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 250px;
+        }
+
+        .enquiry-form input[type="text"]::placeholder,
+        .enquiry-form input[type="email"]::placeholder,
+        .enquiry-form input[type="tel"]::placeholder {
+            color: #888;
+        }
+
+        .enquiry-form input[type="submit"],
+        .enquiry-form .button {
+            padding: 10px 20px;
+            background: red;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .enquiry-form input[type="submit"]:hover,
+        .enquiry-form .button:hover {
+            background: #333;
+        }
+
+        .enquiry-form .input-group {
+            display: flex;
+            align-items: center;
+        }
+
+        .enquiry-form .input-group span {
+            padding: 10px;
+            background: #ddd;
+            border: 1px solid #ddd;
+            border-right: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+
+        .enquiry-form .input-group input[type="tel"] {
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        #responseMessage {
+            margin-top: 20px;
+            color: green;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background-color: #fff;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .sidebar.active {
+            display: block;
+        }
+
+        .close-btn {
+            font-size: 24px;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 60px 0 0 0;
+        }
+
+        .sidebar ul li {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .sidebar ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            padding: 10px 20px;
+            display: block;
+        }
+
+        .sidebar ul li .dropdown-content {
+            display: none;
+            position: relative;
+            background-color: #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            margin-top: 10px;
+        }
+
+        .sidebar ul li .dropdown-content a {
+            padding: 10px 20px;
+            display: block;
+            white-space: nowrap;
+        }
+
+        .sidebar ul li .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .sidebar ul li.active .dropdown-content {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                display: none;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+        }
+
+        .location-section {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.location-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.location-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.map-container,
+.location-highlights {
+    flex: 1;
+    min-width: 300px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 400px;
+    border: 0;
+    border-radius: 5px;
+}
+
+.location-highlights {
+    margin-top: 20px;
+}
+
+.location-highlights h3 {
+    color: red;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.location-highlights ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.location-highlights ul li {
+    padding: 5px 0;
+}
+
+@media (max-width: 768px) {
+    .location-content {
+        flex-direction: column;
+    }
+
+    .map-container {
+        margin-bottom: 20px;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Shubhada Developers Logo" class="logo"></a>
+        </div>
+        <div class="nav-container">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li>
+                    <a href="javascript:void(0)">PROJECTS</a>
+                    <div class="dropdown-content">
+                        <a href="sheshadri-nivas.html">Sheshadri Nivas</a>
+                    </div>
+                </li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+        <div class="menu-icon" id="menuIcon"><i class="fas fa-bars"></i></div>
+        <div class="text-box">
+            <h1>Sheshadri Nivas</h1>
+            <p>Welcome to Sheshadri Nivas. Here you will find all the details about our prestigious project.</p>
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <div class="close-btn" id="closeBtn">&times;</div>
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li class="has-dropdown">
+                <a href="javascript:void(0)" id="projectsLink">PROJECTS</a>
+                <div class="dropdown-content">
+                    <a href="sheshadri-nivas.html">Sheshadri Nivas</a>
+                </div>
+            </li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </div>
+
+    <section class="new-section">
+        <h2 class="section-title">AMENITIES & FEATURES</h2>
+        <div class="points-container">
+            <div class="point">DTCP/GWMC approved layout</div>
+            <div class="point">All Internal CC Roads</div>
+            <div class="point">Elevated Main Gate with Arch</div>
+            <div class="point">Underground Drainage</div>
+            <div class="point">Avenue Plantation with Drip System</div>
+            <div class="point">100% Vaastu & Clear title</div>
+            <div class="point">Water pipe line to each plot</div>
+            <div class="point">3 Phase Electricity with 1 transformer</div>
+            <div class="point">Water Harvesting Pits & Separate Garbage Area</div>
+            <div class="point">Well-developed park area,Lawns and compound wall</div>
+            <div class="point">Footpath with curbing stones</div>
+            <div class="point">Upcoming Planned Villas & Apartments</div>
+        </div>
+    </section>
+
+    <section class="location-section">
+        <h2 class="section-title">LOCATION</h2>
+        <div class="location-content">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3793.4851259290604!2d79.59061907518036!3d18.049082982955387!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTjCsDAyJzU2LjciTiA3OcKwMzUnMzUuNSJF!5e0!3m2!1sen!2sin!4v1722419626945!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div class="location-highlights">
+                <h3>Location Highlights:</h3>
+                <ul>
+                    <li>Under Greater Warangal Municipal Corporation (GWMC) Limits.</li>
+                    <li>Just beside to Outer Ring Road, (NH-163).</li>
+                    <li>3 KM from Prathima Cancer Institute.</li>
+                    <li>4 KM from Hanamkonda Chowrastha.</li>
+                    <li>3 KM NSR Appolo - Reach Hospital.</li>
+                    <li>Near to prathima Relief Medical Institute.</li>
+                    <li>Suitable site for immadiate house construction.</li>
+                </ul>
+            </div>
+        </div>
+        <a href="images/broacher.pdf" download class="button">Download Broacher</a>
+        <a href="plot-availability.html" target="_blank" class="button">Online Plot Availability</a>
+    </section>
+    
+    <section class="new-section">
+        <h2 class="section-title">ENQUIRY</h2>
+        <form id="enquiryForm" action="/submit_enquiry" method="post" class="enquiry-form">
+            <input type="text" name="name" placeholder="Name" required>
+            <div class="mobile-number-container">
+                <span>+91</span>
+                <input type="text" name="mobile" placeholder="Mobile Number" required>
+            </div>
+            <input type="email" name="email" placeholder="Email" required>
+            <div class="form-buttons">
+                <button type="submit" class="button">Submit</button>
+                <button type="button" id="clearButton" class="button">Clear</button>
+            </div>
+        </form>
+        <div id="responseMessage"></div>
+    </section>
+    
+    <script>
+        document.getElementById('enquiryForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+
+            try {
+                const response = await fetch('/submit_enquiry', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+                document.getElementById('responseMessage').textContent = result.message || 'Enquiry submitted successfully!';
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('responseMessage').textContent = 'An error occurred. Please try again.';
+            }
+        });
+
+        // Clear button functionality
+        document.getElementById('clearButton').addEventListener('click', () => {
+            document.querySelector('#enquiryForm input[name="name"]').value = '';
+            document.querySelector('#enquiryForm input[name="mobile"]').value = '';
+            document.querySelector('#enquiryForm input[name="email"]').value = '';
+            document.getElementById('responseMessage').textContent = '';
+        });
+
+        // Sidebar toggle functionality
+        const menuIcon = document.getElementById('menuIcon');
+        const sidebar = document.getElementById('sidebar');
+        const closeBtn = document.getElementById('closeBtn');
+
+        menuIcon.addEventListener('click', () => {
+            sidebar.classList.add('active');
+            menuIcon.style.display = 'none';
+        });
+
+        closeBtn.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            menuIcon.style.display = 'block';
+        });
+
+        // Toggle dropdown in the sidebar
+        const projectsLink = document.getElementById('projectsLink');
+        projectsLink.addEventListener('click', () => {
+            const parentLi = projectsLink.closest('li');
+            parentLi.classList.toggle('active');
+        });
+    </script>
+
+    <footer class="footer">
+        <p>&copy; 2024 Shubhada Developers. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <title>Plot Availability - Shubhada Developers</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="icon" href="images/logo.png" type="image/x-icon">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .scrollable-container {
+            overflow-x: auto;
+            width: 100%;
+        }
+
+        .container {
+            position: relative;
+            text-align: center;
+            margin: 20px;
+            display: inline-block;
+        }
+
+        .container img {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        .plot-button {
+            position: absolute;
+            width: 5%; /* Default width for larger screens */
+            height: auto;
+            font-size: 0.8em; /* Slightly smaller font size */
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+            border-radius: 3px; /* Rounded corners for better aesthetics */
+        }
+
+        @media (max-width: 768px) {
+            .plot-button {
+                width: 7%; /* Adjust width for tablets */
+                font-size: 0.7em; /* Slightly smaller font size for tablets */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .plot-button {
+                width: 8%; /* Adjust width for mobile screens */
+                font-size: 0.6em; /* Smaller font size for mobile screens */
+                padding: 1px; /* Reduced padding for smaller screens */
+            }
+        }
+
+        .footer {
+            background-color: #fff;
+            padding: 20px;
+            text-align: center;
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="scrollable-container">
+        <div class="container">
+            <h1>Plot Availability</h1>
+            <img src="images/plots map.jpg" alt="Plot Availability">
+            <div id="plots-container"></div>
+        </div>
+    </div>
+
+    <script>
+       const defaultPlotPositions = [
+    // Define positions for larger screens (desktops)
+    // Your existing position data here
+    { number: 1, top: '39%', left: '75%' },
+            { number: 2, top: '43%', left: '75%' },
+            { number: 3, top: '47.5%', left: '75%' },
+            { number: 4, top: '52.5%', left: '75%' },
+            { number: 5, top: '61.5%', left: '75%' },
+            { number: 6, top: '66.5%', left: '75%' },
+            { number: 7, top: '70.9%', left: '75%' },
+            { number: 8, top: '76.5%', left: '75%' },
+            { number: 9, top: '80.5%', left: '75%' },
+            { number: 10, top: '84.5%', left: '75%' },
+            { number: 11, top: '85.2%', left: '64%' },
+            { number: 12, top: '81.5%', left: '64%' },
+            { number: 13, top: '77%', left: '64%' },
+            { number: 14, top: '73%', left: '64%' },
+            { number: 15, top: '69.5%', left: '64%' },
+            { number: 16, top: '65.5%', left: '64%' },
+            { number: 17, top: '61.5%', left: '64%' },
+            { number: 18, top: '52.5%', left: '64%' },
+            { number: 19, top: '48.5%', left: '64%' },
+            { number: 20, top: '44.5%', left: '64%' },
+            { number: 21, top: '40.5%', left: '64%' },
+            { number: 22, top: '36.8%', left: '64%' },
+            { number: 23, top: '33%', left: '64%' },
+            { number: 24, top: '30%', left: '64%' },
+            { number: 25, top: '27.1%', left: '64%' },
+            { number: 26, top: '25.1%', left: '51%' },
+            { number: 27, top: '30%', left: '51%' },
+            { number: 28, top: '33%', left: '51%' },
+            { number: 29, top: '36.8%', left: '51%' },
+            { number: 30, top: '40.5%', left: '51%' },
+            { number: 31, top: '44.5%', left: '51%' },
+            { number: 32, top: '48.5%', left: '51%' },
+            { number: 33, top: '52.5%', left: '51%' },
+            { number: 34, top: '61.5%', left: '51%' },
+            { number: 35, top: '69.5%', left: '51%' },
+            { number: 36, top: '65.5%', left: '51%' },
+            { number: 37, top: '73%', left: '51%' },
+            { number: 38, top: '77%', left: '51%' },
+            { number: 39, top: '81.5%', left: '51%' },
+            { number: 40, top: '85.2%', left: '51%' },
+            { number: 41, top: '85.2%', left: '42%' },
+            { number: 42, top: '81.5%', left: '42%' },
+            { number: 43, top: '77%', left: '42%' },
+            { number: 44, top: '73%', left: '42%' },
+            { number: 45, top: '65.5%', left: '42%' },
+            { number: 46, top: '69.5%', left: '42%' },
+            { number: 47, top: '61.5%', left: '42%' },
+            { number: 48, top: '52.5%', left: '42%' },
+            { number: 49, top: '48.5%', left: '42%' },
+            { number: 50, top: '44.5%', left: '42%' },
+            { number: 51, top: '40.5%', left: '42%' },
+            { number: 52, top: '36.8%', left: '42%' },
+            { number: 53, top: '33%', left: '42%' },
+            { number: 54, top: '30%', left: '42%' },
+            { number: 55, top: '25.1%', left: '42%' },
+            { number: 56, top: '25.1%', left: '29%' },
+            { number: 57, top: '30%', left: '29%' },
+            { number: 58, top: '33%', left: '29%' },
+            { number: 59, top: '36.8%', left: '29%' },
+            { number: 60, top: '40.5%', left: '29%' },
+            { number: 61, top: '44.5%', left: '29%' },
+            { number: 62, top: '48.5%', left: '29%' },
+            { number: 63, top: '52.5%', left: '29%' },
+            { number: 64, top: '61.5%', left: '29%' },
+            { number: 65, top: '69.5%', left: '29%' },
+            { number: 66, top: '65.5%', left: '29%' },
+            { number: 67, top: '73%', left: '29%' },
+            { number: 68, top: '77%', left: '29%' },
+            { number: 69, top: '81.5%', left: '29%' },
+            { number: 70, top: '81.5%', left: '21%' },
+            { number: 71, top: '77%', left: '21%' },
+            { number: 72, top: '73%', left: '21%' },
+            { number: 73, top: '69.5%', left: '21%' },
+            { number: 74, top: '65.5%', left: '21%' },
+            { number: 75, top: '61.5%', left: '21%' },
+            { number: 76, top: '52.5%', left: '21%' },
+            { number: 77, top: '48.5%', left: '21%' },
+            { number: 78, top: '44.5%', left: '21%' },
+            { number: 79, top: '40.5%', left: '21%' },
+            { number: 80, top: '36.8%', left: '21%' },
+            { number: 81, top: '33%', left: '21%' },
+            { number: 82, top: '30%', left: '21%' },
+            { number: 83, top: '25.1%', left: '21%' },
+            { number: 84, top: '61.5%', left: '7%' },
+            { number: 85, top: '65.5%', left: '7%' },
+            { number: 86, top: '69.5%', left: '7%' },
+            { number: 87, top: '73%', left: '7%' },
+            { number: 88, top: '77%', left: '7%' },
+            { number: 89, top: '81.5%', left: '7%' },
+];
+
+const tabletPlotPositions = [
+    // Define positions for tablets
+    // Adjusted positions as needed for tablet screens
+    { number: 1, top: '39.5%', left: '75%' },
+            { number: 2, top: '43.5%', left: '75%' },
+            { number: 3, top: '47.9%', left: '75%' },
+            { number: 4, top: '52.5%', left: '75%' },
+            { number: 5, top: '62.9%', left: '75%' },
+            { number: 6, top: '67.5%', left: '75%' },
+            { number: 7, top: '71.9%', left: '75%' },
+            { number: 8, top: '76.5%', left: '75%' },
+            { number: 9, top: '80.5%', left: '75%' },
+            { number: 10, top: '84.5%', left: '75%' },
+            { number: 11, top: '85%', left: '62.5%'},
+            { number: 12, top: '81%', left: '62.5%'},
+            { number: 13, top: '77.5%', left: '62.5%'},
+            { number: 14, top: '73.5%', left: '62.5%'},
+            { number: 15, top: '69.9%', left: '62.5%'},
+            { number: 16, top: '66.5%', left: '62.5%'},
+            { number: 17, top: '61.5%', left: '62.5%'},
+            { number: 18, top: '52.5%', left: '62.5%'},
+            { number: 19, top: '48.5%', left: '62.5%'},
+            { number: 20, top: '44.6%', left: '62.5%'},
+            { number: 21, top: '40.9%', left: '62.5%'},
+            { number: 22, top: '37%', left: '62.5%'},
+            { number: 23, top: '33.5%', left: '62.5%'},
+            { number: 24, top: '30.5%', left: '62.5%'},
+            { number: 25, top: '27.5%', left: '62.5%'},
+            { number: 26, top: '25.5%', left: '49.5%'},
+            { number: 27, top: '29.9%', left: '49.5%'},
+            { number: 28, top: '33.5%', left: '49.5%'},
+            { number: 29, top: '37.5%', left: '49.5%'},
+            { number: 30, top: '41.5%', left: '49.5%'},
+            { number: 31, top: '45%', left: '49.5%'},
+            { number: 32, top: '48.5%', left: '49.5%'},
+            { number: 33, top: '52.5%', left: '49.5%'},
+            { number: 34, top: '61.5%', left: '49.5%'},
+            { number: 35, top: '66.5%', left: '49.5%'},
+            { number: 36, top: '69.9%', left: '49.5%'},
+            { number: 37, top: '73.5%', left: '49.5%'},
+            { number: 38, top: '77.5%', left: '49.5%'},
+            { number: 39, top: '81%', left: '49.5%'},
+            { number: 40, top: '85%', left: '49.5%'},
+            { number: 41, top: '84.7%', left: '41%'},
+            { number: 42, top: '81%', left: '41%'},
+            { number: 43, top: '77.5%', left: '41%'},
+            { number: 44, top: '73.5%', left: '41%'},
+            { number: 45, top: '69.9%', left: '41%'},
+            { number: 46, top: '66.5%', left: '41%'},
+            { number: 47, top: '61.5%', left: '41%'},
+            { number: 48, top: '52.5%', left: '41%'},
+            { number: 49, top: '48.5%', left: '41%'},
+            { number: 50, top: '45%', left: '41%'},
+            { number: 51, top: '41.5%', left: '41%'},
+            { number: 52, top: '37.5%', left: '41%'},
+            { number: 53, top: '33.5%', left: '41%'},
+            { number: 54, top: '29.9%', left: '41%'},
+            { number: 55, top: '25.5%', left: '41%'},
+            { number: 56, top: '25.5%', left: '28%'},
+            { number: 57, top: '29.9%', left: '28%'},
+            { number: 58, top: '33.5%', left: '28%'},
+            { number: 59, top: '37.5%', left: '28%'},
+            { number: 60, top: '41.5%', left: '28%'},
+            { number: 61, top: '45%', left: '28%'},
+            { number: 62, top: '48.5%', left: '28%'},
+            { number: 63, top: '52.5%', left: '28%'},
+            { number: 64, top: '61.5%', left: '28%'},
+            { number: 65, top: '66.5%', left: '28%'},
+            { number: 66, top: '69.9%', left: '28%'},
+            { number: 67, top: '73.5%', left: '28%'},
+            { number: 68, top: '77.5%', left: '28%'},
+            { number: 69, top: '81%', left: '28%'},
+            { number: 70, top: '81%', left: '19%'},
+            { number: 71, top: '77.5%', left: '19%'},
+            { number: 72, top: '73.5%', left: '19%'},
+            { number: 73, top: '69.9%', left: '19%'},
+            { number: 74, top: '66.5%', left: '19%'},
+            { number: 75, top: '61.5%', left: '19%'},
+            { number: 76, top: '52.5%', left: '19%'},
+            { number: 77, top: '48.5%', left: '19%'},
+            { number: 78, top: '45%', left: '19%'},
+            { number: 79, top: '41.5%', left: '19%'},
+            { number: 80, top: '37.5%', left: '19%'},
+            { number: 81, top: '33.5%', left: '19%'},
+            { number: 82, top: '29.9%', left: '19%'},
+            { number: 83, top: '25.5%', left: '19%'},
+            { number: 84, top: '61.5%', left: '7%'},
+            { number: 85, top: '66.5%', left: '7%'},
+            { number: 86, top: '69.9%', left: '7%'},
+            { number: 87, top: '73.5%', left: '7%'},
+            { number: 88, top: '77.5%', left: '7%'},
+            { number: 89, top: '81%', left: '7%'},
+           
+];
+
+const mobilePlotPositions = [
+    // Define positions for mobile screens
+    // Adjusted positions for smaller screens
+];
+
+function getPlotPositions() {
+    const width = window.innerWidth;
+
+    if (width <= 576) {
+        return mobilePlotPositions;
+    } else if (768 <= width <= 1024) {
+        return tabletPlotPositions;
+    } else {
+        return defaultPlotPositions;
+    }
+}
+
+function updatePlotPositions() {
+    const plotPositions = getPlotPositions();
+    const buttons = document.querySelectorAll('.plot-button');
+    buttons.forEach((button, index) => {
+        button.style.top = plotPositions[index].top;
+        button.style.left = plotPositions[index].left;
+    });
+}
+
+fetch('http://localhost:5000/plots')
+    .then(response => response.json())
+    .then(plots => {
+        const container = document.getElementById('plots-container');
+        const plotPositions = getPlotPositions();
+
+        plots.forEach((plot, index) => {
+            const button = document.createElement('a');
+            button.className = 'plot-button';
+            button.href = '#';
+            button.textContent = `Plot ${plot.plotno}`;
+            button.style.top = plotPositions[index].top;
+            button.style.left = plotPositions[index].left;
+
+            button.style.backgroundColor = plot.status === 'Sold' ? 'red' : 'green';
+
+            button.addEventListener('click', () => {
+                alert(`Plot Details:
+Plot No: ${plot.plotno}
+Length (Feet 1): ${plot.lengthfeet1}
+Length (Inches 1): ${plot.lengthinches1}
+Length (Feet 2): ${plot.lengthfeet2}
+Length (Inches 2): ${plot.lengthinches2}
+Width (Feet 1): ${plot.widthfeet1}
+Width (Inches 1): ${plot.widthinches1}
+Width (Feet 2): ${plot.widthfeet2}
+Width (Inches 2): ${plot.widthinches2}
+Area: ${plot.plotarea}
+Facing: ${plot.plotfacing}
+Status: ${plot.status}`);
+            });
+            container.appendChild(button);
+        });
+
+        updatePlotPositions();
+    })
+    .catch(error => console.error('Error fetching plot data:', error));
+
+window.addEventListener('resize', updatePlotPositions);
+    </script>
+</body>
+</html>
